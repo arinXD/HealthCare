@@ -10,14 +10,18 @@
         {{Auth::user()->name}}
     </h1>
     <p>
+        {{$user->diet_plans}}
         @foreach ($user->diet_plans as $plan)
             <p>Plan: {{$plan->id}}</p>
             <ul>
-            @foreach ($plan->food as $food)
-                <li>{{$food->food_name}}</li>
-            @endforeach
+
+                @foreach ($plan->food as $food)
+                <li>
+
+                    <strong>{{$food->food_name}}</strong> {{$food->calorie}}
+                </li>
+                @endforeach
             </ul>
-           
         @endforeach
     </p>
 </body>
