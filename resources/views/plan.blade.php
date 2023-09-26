@@ -11,15 +11,14 @@
     </h1>
     <p>
         {{$user->diet_plans}}
-
         @foreach ($user->diet_plans as $plan)
             <p>Plan: {{$plan->id}}</p>
-
             <ul>
+
                 @foreach ($plan->foods as $food)
                 <li>
 
-                    <strong>ชื่อ: {{$food->food_name}}</strong> ได้รับพลังงาน {{$food->calorie}}
+                    <strong>{{$food->food_name}}</strong> {{$food->calorie}}
                 </li>
                 @endforeach
             </ul>
