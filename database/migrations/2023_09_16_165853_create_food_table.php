@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->string('img_food');
             $table->string('food_name');
+            $table->string('img_food');
             $table->float('calorie');
             $table->softDeletes();
             $table->timestamps();

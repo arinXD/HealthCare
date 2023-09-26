@@ -21,6 +21,23 @@ class User extends Authenticatable
     public function diet_plans() {
         return $this->hasMany(diet_plan::class);
     }
+    public function bmis() {
+        return $this->hasMany(bmi::class);
+    }
+    public function sleeps() {
+        return $this->hasMany(sleep::class);
+    }
+    public function body_measurements() {
+        return $this->hasMany(body_measurement::class);
+    }
+    public function menstruations() {
+        return $this->hasMany(menstruation::class);
+    }
+    public function exerciserecords() {
+        return $this->hasMany(menstruation::class);
+    }
+
+    
 
     /**
      * The attributes that are mass assignable.

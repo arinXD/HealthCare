@@ -10,4 +10,7 @@ class recommend_type extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    public function recommends() {
+        return $this->hasMany(recommend::class);
+    }
 }

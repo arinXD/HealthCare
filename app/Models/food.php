@@ -14,4 +14,7 @@ class food extends Model
     public function diet_plans() {
         return $this->belongsToMany(diet_plan::class);
     }
+    public function diet_details() {
+        return $this->hasMany(diet_detail::class);
+    }
 }

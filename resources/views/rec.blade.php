@@ -10,20 +10,21 @@
         {{Auth::user()->fname}} {{Auth::user()->lname}}
     </h1>
     <p>
-        {{$user->diet_plans}}
 
-        @foreach ($user->diet_plans as $plan)
-            <p>Plan: {{$plan->id}}</p>
+        {{$user->bmis}}
+        {{-- @foreach ($user->bmis as $bmi)
+            <p>rec: {{$bmi->id}}</p>
 
             <ul>
-                @foreach ($plan->foods as $food)
+
+                @foreach ($user->$food as $food)
                 <li>
 
                     <strong>ชื่อ: {{$food->food_name}}</strong> ได้รับพลังงาน {{$food->calorie}}
                 </li>
                 @endforeach
             </ul>
-        @endforeach
+        @endforeach --}}
     </p>
 </body>
 </html>
