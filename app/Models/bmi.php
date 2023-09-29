@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class bmi extends Model
 {
     use HasFactory;
+    function user(){
+        return "haha";
+    }
 }
