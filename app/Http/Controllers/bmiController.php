@@ -82,7 +82,7 @@ class bmiController extends Controller
 
     public function deletebmi($id)
     {
-        // ลบข้อมูลนักศึกษา (Soft Delete)
+        // ลบข้อมูลbmi(Soft Delete)
         $bmi = bmi::find($id);
         if ($bmi) {
             $bmi->delete();
