@@ -61,7 +61,7 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('วันเกิด') }}" />
                 <x-input id="birth" class="block mt-1 w-full" type="date"
-                    name="birth" required autocomplete="new-password" />
+                    name="birth" required  />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -118,5 +118,39 @@
             </a>
 
         </div>
+
     </x-authentication-card>
 </x-guest-layout>
+
+<script>
+    // เราเพิ่ม Event Listener สำหรับ input events ในฟิลด์ที่มี id เป็น "birth"
+    document.getElementById('birth').addEventListener('input', function() {
+        // เมื่อผู้ใช้ป้อนข้อมูลลงในฟิลด์
+
+        // สร้างวัตถุ Date จากค่าที่ผู้ใช้ป้อน
+        var selectedDate = new Date(this.value);
+
+        // สร้างวัตถุ Date ปัจจุบัน
+        var currentDate = new Date();
+
+        // ลบ 5 ปีจากวันที่ปัจจุบัน ใช้ setFullYear() เพื่อกำหนดปีใหม่ของ currentDate
+        // getFullYear() ใช้ดึงค่าปีจากวันที่ ที่กำหนดในวัตถุ Date ค่าที่ getFullYear() ส่งออกคือจำนวนเต็มที่แทนปีของวันที่นั้น ๆ
+        currentDate.setFullYear(currentDate.getFullYear() - 5);
+
+        // เปรียบเทียบว่าวันที่ที่ผู้ใช้เลือกมากกว่าวันที่ทำให้มีอายุมากกว่า 5 ปีหรือไม่
+        if (selectedDate > currentDate) {
+            // ถ้าไม่ตรงตามเงื่อนไข แสดงข้อความแจ้งเตือน
+            alert('กรุณาเลือกวันที่ที่ทำให้คุณมีอายุมากกว่า 5 ปี');
+
+            // ล้างค่าในฟิลด์
+            this.value = '';
+        }
+    });
+</script>
+
+
+
+
+
+
+

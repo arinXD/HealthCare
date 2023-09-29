@@ -17,7 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+
+    // เปลี่ยนหน้าแสดงเมื่อlogin
+    public const HOME = '/homepage';
+
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

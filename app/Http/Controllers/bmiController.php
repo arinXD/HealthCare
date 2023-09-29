@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bmi;
+use App\Models\recommend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,10 +11,10 @@ class bmiController extends Controller
 {
     public function index()
     {
-        $infos = bmi::all();
+        $bmi = bmi::all();
         $user = Auth::user();
 
-        return view('bmi', ['$infos' => $infos,'user'=>$user]);
+        return view('bmi', ['$bmi' => $bmi, 'user' => $user]);
     }
     public function calculateBMI(Request $request)
     {
@@ -23,7 +24,7 @@ class bmiController extends Controller
 
         // คำนวณ BMI
 
-        $bmi =  $weight / (($height/100) * ($height/100));
+        $bmi =  $weight / (($height / 100) * ($height / 100));
 
         // กำหนดเกณฑ์ของ BMI
         if ($bmi < 18.50) {
@@ -39,9 +40,55 @@ class bmiController extends Controller
         }
 
         // ส่งผลลัพธ์กลับไปยังหน้า View
-        return view('bmi', ['bmi'=>$bmi, 'status'=>$status]);
+        return view('bmi', ['bmi' => $bmi, 'status' => $status, 'weight' => $weight, 'height' => $height]);
     }
 
+    public function savebmi(Request $request)
+    {
+
+        // บันทึกข้อมูลลงในตาราง bmi ในฐานข้อมูล
+        $user = Auth::user();
+        $bmis = new bmi();
+        $bmis->weight = $request->input('weight');
+        $bmis->height = $request->input('height');
+        $bmis->bmi = $request->input('bmi');
+        $bmis->user_id = $user->id; // เชื่อมความสัมพันธ์กับผู้ใช้
+        $bmis->save();
+        // หลังจากบันทึกข้อมูลเสร็จสิ้น คุ redirect ไปยังหน้าbmi
+        return redirect ('recommend');
+    }
+
+
+    public function recommend()
+    {
+        $user = Auth::user();
+        $recommends = recommend::all();
+        $bmis = bmi::all();
+
+        return view('recommend', compact(
+            'bmis',
+            'user',
+            'recommends'
+        ));
+    }
+    public function recommendpro()
+    {
+        $user = Auth::user();
+        $recommends = recommend::all();
+        $bmis = bmi::all();
+
+        return view('recommendpro', compact('bmis', 'user', 'recommends'));
+    }
+
+    public function deletebmi($id)
+    {
+        // ลบข้อมูลนักศึกษา (Soft Delete)
+        $bmi = bmi::find($id);
+        if ($bmi) {
+            $bmi->delete();
+        }
+
+
+        return redirect('/recommend');
+    }
 }
-
-
