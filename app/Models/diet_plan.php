@@ -11,8 +11,8 @@ class diet_plan extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function foods() {
-        return $this->belongsToMany(Food::class);
+    public function diet_plan_foods() {
+        return $this->hasMany(diet_plan_food::class);
     }
     public function user() {
         return $this->belongsTo(User::class);

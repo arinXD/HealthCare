@@ -6,6 +6,7 @@ use App\Models\food;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\bmiController;
+use App\Http\Controllers\healthrecordController;
 
 
 
@@ -58,9 +59,13 @@ Route::middleware([
     // แก้หน้านี้
     Route::get('/recommendpro', [bmiController::class, 'recommendpro'])->name('recommendpro');
 
-    Route::get('/healthrecord', function () {
-        return view('healthrecord');
-    })->name('healthrecord');
+    Route::get('/healthrecord', [healthrecordController::class, 'index'])->name('healthrecord');
+    Route::get('/healthrecord/board', [healthrecordController::class, 'board']);
+    Route::post('/healthrecord/insert', [healthrecordController::class, 'addFoodPlan']);
+    Route::get('/healthrecord/update/{id}', [healthrecordController::class, 'updatePage']);
+    Route::post('/healthrecord/updated', [healthrecordController::class, 'update']);
+    Route::get('/healthrecord/delete/{id}', [healthrecordController::class, 'delete']);
+    Route::get('/healthrecord/chart', [healthrecordController::class, 'chart']);
 
 
 
